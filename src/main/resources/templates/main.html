@@ -1,114 +1,112 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-	<head>
-	    <meta charset="UTF-8">
-	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	    <title>엑셀 업로드</title>
-	    <link rel="stylesheet" href="/css/main.css">
-	    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
-	</head>
-	<body>
-		<div class="page">
-		    <div class="page-inner">
-		        <header class="page-header">
-		            <div class="page-header-text">
-		                <p class="eyebrow">Excel Editor Service</p>
-		                <h1>엑셀 업로드 후 수정 및 재다운로드</h1>
-		                <p class="page-desc">
-		                    엑셀 파일을 업로드하고, 데이터를 웹 테이블에서 직접 수정한 뒤 다시 엑셀 파일로 저장할 수 있습니다.
-		                </p>
-		            </div>
-		        </header>
-		
-		        <main class="content-grid">
-		            <section class="card control-card">
-		                <div class="card-header">
-		                    <div>
-		                        <h2>파일 업로드</h2>
-		                        <p>xls, xlsx 파일을 불러와서 웹에서 바로 수정할 수 있습니다.</p>
-		                    </div>
-		                </div>
-		
-		                <div class="upload-panel">
-		                    <label for="fileInput" class="upload-dropzone" id="dropzone">
-		                        <div class="upload-icon">↑</div>
-		                        <div class="upload-text">
-		                            <strong>엑셀 파일 선택</strong>
-		                            <span>클릭하거나 파일을 여기로 드래그하세요</span>
-		                        </div>
-		                    </label>
-		
-		                    <input type="file" id="fileInput" accept=".xls,.xlsx" hidden>
-		
-		                    <div class="selected-file" id="selectedFileName">선택된 파일 없음</div>
-		
-		                    <div class="action-row">
-		                        <button type="button" id="uploadBtn" class="btn btn-primary">업로드</button>
-		                        <button type="button" id="downloadBtn" class="btn btn-secondary">수정본 엑셀 다운로드</button>
-		                    </div>
-		                </div>
-		
-		                <div id="message" class="message-box info">
-		                    파일을 업로드하면 아래에서 데이터를 확인하고 수정할 수 있습니다.
-		                </div>
-		            </section>
-		
-		            <section class="card info-card">
-		                <div class="card-header">
-		                    <div>
-		                        <h2>작업 정보</h2>
-		                        <p>업로드 후 테이블 셀을 직접 수정하고 다시 엑셀로 저장합니다.</p>
-		                    </div>
-		                </div>
-		
-		                <div class="info-list">
-		                    <div class="info-item">
-		                        <span class="info-label">지원 형식</span>
-		                        <strong>.xls / .xlsx</strong>
-		                    </div>
-		                    <div class="info-item">
-		                        <span class="info-label">편집 방식</span>
-		                        <strong>셀 직접 수정</strong>
-		                    </div>
-		                    <div class="info-item">
-		                        <span class="info-label">다운로드</span>
-		                        <strong>엑셀 재생성</strong>
-		                    </div>
-		                    <div class="info-item">
-		                        <span class="info-label">반응형</span>
-		                        <strong>모바일 지원</strong>
-		                    </div>
-		                </div>
-		            </section>
-		        </main>
-		
-		        <section class="card table-card">
-		            <div class="card-header table-card-header">
-		                <div>
-		                    <h2>데이터 미리보기</h2>
-		                    <p>업로드한 데이터를 확인하고 수정하세요.</p>
-		                </div>
-		                <div class="table-meta">
-		                    <span class="table-badge">Editable Table</span>
-		                    <span class="row-count" id="rowCount">0 rows</span>
-		                </div>
-		            </div>
-		
-		            <div class="table-area">
-		                <table id="resultTable" class="excel-table">
-		                    <thead></thead>
-		                    <tbody></tbody>
-		                </table>
-		
-		                <div id="emptyState" class="empty-state">
-		                    <div class="empty-icon">□</div>
-		                    <p>아직 업로드된 데이터가 없습니다.</p>
-		                    <span>엑셀 파일을 업로드하면 여기에 표가 표시됩니다.</span>
-		                </div>
-		            </div>
-		        </section>
-		    </div>
-		</div>
-		<script src="/js/main.js"></script>
-	</body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>엑셀 업로드</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+<div class="page">
+    <div class="page-inner">
+        <header class="page-header">
+            <div class="page-header-text">
+                <p class="eyebrow">Excel Editor Service</p>
+                <h1>엑셀 업로드 후 수정 및 재다운로드</h1>
+                <p class="page-desc">
+                    엑셀 파일을 업로드하고, 데이터를 웹 테이블에서 직접 수정한 뒤 다시 엑셀 파일로 저장할 수 있습니다.
+                </p>
+            </div>
+
+            <div class="header-sample-box">
+                <div class="header-sample-text">
+                    <strong>샘플 엑셀 파일</strong>
+                    <span>샘플 파일을 바로 다운로드할 수 있습니다.</span>
+                </div>
+                <a href="/sample/download" class="btn btn-primary">샘플 파일 다운로드</a>
+            </div>
+        </header>
+
+        <main class="content-grid">
+            <section class="card control-card">
+                <div class="card-header">
+                    <div>
+                        <h2>파일 업로드</h2>
+                        <p>xls, xlsx 파일을 불러와서 웹에서 바로 수정할 수 있습니다.</p>
+                    </div>
+                </div>
+
+                <div class="upload-panel">
+                    <label for="fileInput" class="upload-dropzone" id="dropzone">
+                        <div class="upload-icon">↑</div>
+                        <div class="upload-text">
+                            <strong>엑셀 파일 선택</strong>
+                            <span>클릭하거나 파일을 여기로 드래그하세요</span>
+                        </div>
+                    </label>
+
+                    <input type="file" id="fileInput" accept=".xls,.xlsx" hidden>
+
+                    <div class="selected-file" id="selectedFileName">선택된 파일 없음</div>
+
+                    <div class="action-row">
+                        <button type="button" id="uploadBtn" class="btn btn-primary">업로드</button>
+                        <button type="button" id="downloadBtn" class="btn btn-secondary">수정본 엑셀 다운로드</button>
+                    </div>
+                </div>
+
+                <div id="message" class="message-box info">
+                    파일을 업로드하면 아래에서 데이터를 확인하고 수정할 수 있습니다.
+                </div>
+            </section>
+
+            <section class="card notice-card">
+                <div class="card-header">
+                    <div>
+                        <h2>주의사항</h2>
+                        <p>사용 전 아래 내용을 꼭 확인하세요.</p>
+                    </div>
+                </div>
+
+                <div class="notice-box">
+                    <ul class="notice-list">
+                        <li>수식 셀은 변경할 수 없습니다.</li>
+                        <li>엑셀을 수정하고 다운로드 받으면 셀 병합, 글자 데이터, 셀 서식은 원본 엑셀과 최대한 같게 유지됩니다.</li>
+                        <li>웹페이지 테이블 수정 시 빈값에 값을 넣고 다운로드하면 셀서식이 일반으로 저장됩니다.</li>
+                        <li>다만 색깔, 사용자 지정 양식 등 일부 설정은 깨질 수 있습니다.</li>
+                        <li>따라서 본 프로그램은 글자 데이터만 다루는 엑셀 파일에서만 사용하는 것을 권장합니다.</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <section class="card table-card">
+            <div class="card-header table-card-header">
+                <div>
+                    <h2>데이터 미리보기</h2>
+                    <p>업로드한 데이터를 확인하고 수정하세요.</p>
+                </div>
+                <div class="table-meta">
+                    <span class="table-badge">Editable Table</span>
+                    <span class="row-count" id="rowCount">0 rows</span>
+                </div>
+            </div>
+
+            <div class="table-area">
+                <table id="resultTable" class="excel-table">
+                    <thead></thead>
+                    <tbody></tbody>
+                </table>
+
+                <div id="emptyState" class="empty-state">
+                    <p>아직 업로드된 데이터가 없습니다.</p>
+                    <span>엑셀 파일을 업로드하면 여기에 표가 표시됩니다.</span>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<script src="/js/main.js"></script>
+</body>
 </html>
