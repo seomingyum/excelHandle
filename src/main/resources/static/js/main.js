@@ -225,3 +225,23 @@ function setMessage(text, type = "info") {
     messageBox.textContent = text;
     messageBox.className = `message-box ${type}`;
 }
+
+const portfolioBtn = document.getElementById("portfolioBtn");
+const portfolioModal = document.getElementById("portfolioModal");
+const portfolioCloseBtn = document.getElementById("portfolioCloseBtn");
+
+if (portfolioBtn && portfolioModal && portfolioCloseBtn) {
+    portfolioBtn.addEventListener("click", () => {
+        portfolioModal.classList.add("show");
+    });
+
+    portfolioCloseBtn.addEventListener("click", () => {
+        portfolioModal.classList.remove("show");
+    });
+
+    portfolioModal.addEventListener("click", (e) => {
+        if (e.target === portfolioModal) {
+            portfolioModal.classList.remove("show");
+        }
+    });
+}
