@@ -1,6 +1,7 @@
 package com.example.demo.controller.excel;
 
 import com.example.demo.dto.ExcelDownloadRequestDto;
+
 import com.example.demo.dto.ExcelUploadResponseDto;
 import com.example.demo.service.ExcelMemoryService;
 import jakarta.servlet.http.HttpServletResponse;
@@ -12,8 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/excel")
@@ -23,8 +22,9 @@ public class ExcelController {
     private ExcelMemoryService excelMemoryService;
 
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ExcelUploadResponseDto upload(@RequestParam("file") MultipartFile file) throws Exception {
-        return excelMemoryService.uploadExcel(file);
+    public ExcelUploadResponseDto upload(@RequestParam MultipartFile file) throws Exception {
+    	ExcelUploadResponseDto excelUploadResponseDto = excelMemoryService.uploadExcel(file);
+        return excelUploadResponseDto;
     }
 
     @PostMapping("/download")
@@ -44,14 +44,5 @@ public class ExcelController {
         response.getOutputStream().write(fileBytes);
         response.getOutputStream().flush();
     }
-
-    @ExceptionHandler(Exception.class)
-    @ResponseBody
-    public Map<String, Object> handleException(Exception e, HttpServletResponse response) {
-        response.setStatus(400);
-
-        Map<String, Object> result = new HashMap<>();
-        result.put("message", e.getMessage());
-        return result;
-    }
+    
 }

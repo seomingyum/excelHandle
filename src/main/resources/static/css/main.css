@@ -252,6 +252,19 @@ body {
     white-space: pre-wrap;
 }
 
+.excel-table td {
+    border: 1px solid #d1d5db;
+    padding: 10px 12px;
+    min-width: 120px;
+    vertical-align: middle;
+    white-space: pre-wrap;
+    transition: background 0.15s ease;
+}
+
+.excel-table td:hover {
+    background: #dbeafe;
+}
+
 .excel-table td[contenteditable="true"]:focus {
     outline: 2px solid #2563eb;
     outline-offset: -2px;

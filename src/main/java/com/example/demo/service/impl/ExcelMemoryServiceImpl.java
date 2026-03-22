@@ -438,7 +438,10 @@ public class ExcelMemoryServiceImpl implements ExcelMemoryService {
                     return new java.text.SimpleDateFormat("yyyy-MM-dd").format(date);
                 }
 
-                return formatter.formatRawCellContents(value, formatIndex, formatString);
+                if (value == Math.floor(value)) {
+                    return String.valueOf((long) value);
+                }
+                return String.valueOf(value);
             }
 
             if (type == CellType.STRING) {
